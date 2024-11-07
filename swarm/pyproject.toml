@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "langgraph-playground"
+name = "swarm"
 version = "0.1.0"
 description = ""
 authors = ["MuhammadAhsaanAbbasi <mahsaanabbasi@gmail.com>"]
@@ -7,9 +7,6 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.12"
-langchain = "^0.3.7"
-langgraph = "^0.2.45"
-
 
 
 [build-system]
