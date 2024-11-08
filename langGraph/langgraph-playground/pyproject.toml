@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "langgraph-playground"
+name = "langGraph_Playground"
 version = "0.1.0"
 description = ""
 authors = ["MuhammadAhsaanAbbasi <mahsaanabbasi@gmail.com>"]
