@@ -7,6 +7,19 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.12"
+phidata = {extras = ["aws"], version = "^2.7.5"}
+python-dotenv = "^1.0.1"
+yfinance = "^0.2.51"
+packaging = "^24.2"
+duckduckgo-search = "^7.1.1"
+fastapi = "^0.115.6"
+uvicorn = "^0.34.0"
+groq = "^0.13.1"
+sqlalchemy = "^2.0.36"
+pgvector = "^0.3.6"
+psycopg = {extras = ["binary"], version = "^3.2.3"}
+pypdf = "^5.1.0"
+chromadb = "^0.6.0"
 
 
 [build-system]
