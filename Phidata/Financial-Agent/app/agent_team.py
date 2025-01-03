@@ -1,5 +1,3 @@
-# app/agent_team.py
-# ------------------------------------------------------------------------------
 # type: ignore
 import os
 import typer
@@ -7,7 +5,6 @@ from rich.prompt import Prompt
 from typing import Optional
 from dotenv import load_dotenv
 
-# --- phi imports ---
 from phi.agent import Agent
 from phi.model.openai import OpenAIChat
 from phi.storage.agent.sqlite import SqlAgentStorage
@@ -17,8 +14,7 @@ from phi.embedder.openai import OpenAIEmbedder
 from phi.document.chunking.agentic import AgenticChunking
 from phi.knowledge.pdf import PDFUrlKnowledgeBase
 from phi.vectordb.chroma import ChromaDb
-
-_ = load_dotenv()
+load_dotenv()
 
 vector_db = ChromaDb(
     collection="recipes",
@@ -32,11 +28,8 @@ knowledge_base = PDFUrlKnowledgeBase(
     num_documents=5,
 )
 
-# Load the knowledge base (comment out after first run)
-knowledge_base.load(recreate=False)
+# knowledge_base.load(recreate=False)
 
-
-# YFinance Agent
 finance_agent = Agent(
     name="Finance Agent",
     role="Get financial data",
@@ -44,7 +37,6 @@ finance_agent = Agent(
     show_tool_calls=True,
 )
 
-# DuckDuckGo Agent
 web_agent = Agent(
     name="Web Agent",
     role="Search the web for information",
@@ -52,19 +44,20 @@ web_agent = Agent(
     show_tool_calls=True,
 )
 
-# RAG Agent
 ragAgent = Agent(
+    name="RAG Agent",
+    role="Search the knowledge base for recipes",
     knowledge_base=knowledge_base,
     search_knowledge=True,
 )
 
 agent_team = Agent(
     name="Multi-Capability Team",
-    team=[finance_agent, web_agent, ragAgent],
+    team=[ragAgent, finance_agent, web_agent],
     instructions=[
-        "Use the Finance Agent for financial data queries.",
-        "Use the Web Agent for general web searches.",
-        "Use the RAG Agent to retrieve information from the knowledge base.",
+        "Use the RAG Agent to retrieve recipes from the knowledge base.",
+        "If you don't find the information in the knowledge base, use the Finance Agent for financial data queries.",
+        "If you don't find the information in the knowledge base, use the Web Agent for general web searches.",
     ],
     knowledge_base=knowledge_base,
     show_tool_calls=True,
@@ -72,4 +65,5 @@ agent_team = Agent(
     debug_mode=True
 )
 
+agent_team.knowledge.load(recreate=False)
 agent_team.print_response("What's the current stock price of AAPL and can you find a recipe for Thai green curry?", stream=True)
