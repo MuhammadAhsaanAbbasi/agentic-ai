@@ -1,0 +1,23 @@
+[project]
+name = "customer_outreach"
+version = "0.1.0"
+description = "customer_outreach using crewAI"
+authors = [{ name = "Your Name", email = "you@example.com" }]
+requires-python = ">=3.10,<3.13"
+dependencies = [
+    "crewai[tools]>=0.100.1,<1.0.0"
+]
+
+[project.scripts]
+customer_outreach = "customer_outreach.main:run"
+run_crew = "customer_outreach.main:run"
+train = "customer_outreach.main:train"
+replay = "customer_outreach.main:replay"
+test = "customer_outreach.main:test"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.crewai]
+type = "crew"
