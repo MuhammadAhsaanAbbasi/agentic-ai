@@ -1,17 +1,20 @@
-research_task:
+lead_profiling_task:
   description: >
-    Conduct a thorough research about {topic}
-    Make sure you find any interesting and relevant information given
-    the current year is {current_year}.
+    Conduct an in-depth analysis of {lead_name}, a company in the {industry} sector that recently showed interest in our solutions.
+    Utilize all available data sources to compile a detailed profile, focusing on key decision-makers, recent business developments & potentials needs that align with our offerings.
+    This task is crucial for tailoring our enagagement Strategy effectively, Don've make assumptions & only information you absolutely sure about. 
   expected_output: >
-    A list with 10 bullet points of the most relevant information about {topic}
-  agent: researcher
+    A comprehensive report on {lead_name}, including company background, Key personnel, recent milestones & identified needs.
+    Highlight potentials areas where our solutions can provide value & suggest personalized enagagement strategies.
+  agent: sales_rep_agent
 
-reporting_task:
+personalized_outreach_task:
   description: >
-    Review the context you got and expand each topic into a full section for a report.
-    Make sure the report is detailed and contains any and all relevant information.
+    Using the insights gathered from the lead profiling report on {lead_name}, Craft a personalized outreach campaign aimed at {key_decision_maker}, the {position} of {lead_name}.
+    The campaign should address their recent {milestone} & how our solutions can support their goals.
+    Your Communication mustt resonate with {lead_name}'s company culture & values, demonstrating a deep understanding of their business & needs, Don't make assumptions & only use information you absolutely sure about.
   expected_output: >
-    A fully fledged report with the main topics, each with a full section of information.
-    Formatted as markdown without '```'
-  agent: reporting_analyst
+    A series of personalized email drafts tailored to {lead_name}, specifically targeting {key_decision_maker}.
+    Each draft should include a compelling narrative that connects our solutions with their recent achievments & future goals.
+    Ensure the tone is engaging, profesional & Aligned wit {lead_name}'s corporate identity.
+  agent: lead_sales_rep_agent
