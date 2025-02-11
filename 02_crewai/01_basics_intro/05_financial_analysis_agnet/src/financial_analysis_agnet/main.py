@@ -4,7 +4,7 @@ import warnings
 
 from datetime import datetime
 
-from article_agent.crew import ArticleAgent
+from financial_analysis_agnet.crew import FinancialAnalysisAgnet
 
 warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 
@@ -18,12 +18,12 @@ def run():
     Run the crew.
     """
     inputs = {
-        'topic': 'Artifcial Intelliegence',
+        'topic': 'AI LLMs',
         'current_year': str(datetime.now().year)
     }
     
     try:
-        ArticleAgent().crew().kickoff(inputs=inputs)
+        FinancialAnalysisAgnet().crew().kickoff(inputs=inputs)
     except Exception as e:
         raise Exception(f"An error occurred while running the crew: {e}")
 
@@ -36,7 +36,7 @@ def train():
         "topic": "AI LLMs"
     }
     try:
-        ArticleAgent().crew().train(n_iterations=int(sys.argv[1]), filename=sys.argv[2], inputs=inputs)
+        FinancialAnalysisAgnet().crew().train(n_iterations=int(sys.argv[1]), filename=sys.argv[2], inputs=inputs)
 
     except Exception as e:
         raise Exception(f"An error occurred while training the crew: {e}")
@@ -46,7 +46,7 @@ def replay():
     Replay the crew execution from a specific task.
     """
     try:
-        ArticleAgent().crew().replay(task_id=sys.argv[1])
+        FinancialAnalysisAgnet().crew().replay(task_id=sys.argv[1])
 
     except Exception as e:
         raise Exception(f"An error occurred while replaying the crew: {e}")
@@ -59,7 +59,7 @@ def test():
         "topic": "AI LLMs"
     }
     try:
-        ArticleAgent().crew().test(n_iterations=int(sys.argv[1]), openai_model_name=sys.argv[2], inputs=inputs)
+        FinancialAnalysisAgnet().crew().test(n_iterations=int(sys.argv[1]), openai_model_name=sys.argv[2], inputs=inputs)
 
     except Exception as e:
         raise Exception(f"An error occurred while testing the crew: {e}")
