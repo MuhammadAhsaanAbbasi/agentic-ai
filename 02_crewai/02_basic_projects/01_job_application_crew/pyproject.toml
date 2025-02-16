@@ -1,0 +1,23 @@
+[project]
+name = "01_job_application_crew"
+version = "0.1.0"
+description = "01_job_application_crew using crewAI"
+authors = [{ name = "Your Name", email = "you@example.com" }]
+requires-python = ">=3.10,<3.13"
+dependencies = [
+    "crewai[tools]>=0.100.1,<1.0.0"
+]
+
+[project.scripts]
+01_job_application_crew = "01_job_application_crew.main:run"
+run_crew = "01_job_application_crew.main:run"
+train = "01_job_application_crew.main:train"
+replay = "01_job_application_crew.main:replay"
+test = "01_job_application_crew.main:test"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.crewai]
+type = "crew"

@@ -1,14 +1,13 @@
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
-from .tools.custom_tool import search_tool, sentiment_analysis_tool, file_read_tool, directory_read_tool
 
 # If you want to run a snippet of code before or after the crew starts, 
 # you can use the @before_kickoff and @after_kickoff decorators
 # https://docs.crewai.com/concepts/crews#example-crew-class-with-decorators
 
 @CrewBase
-class CustomerOutreach():
-	"""CustomerOutreach crew"""
+class JobApplicationCrew():
+	"""01JobApplicationCrew crew"""
 
 	# Learn more about YAML configuration files here:
 	# Agents: https://docs.crewai.com/concepts/agents#yaml-configuration-recommended
@@ -19,16 +18,16 @@ class CustomerOutreach():
 	# If you would like to add tools to your agents, you can learn more about it here:
 	# https://docs.crewai.com/concepts/agents#agent-tools
 	@agent
-	def sales_rep_agent(self) -> Agent:
+	def researcher(self) -> Agent:
 		return Agent(
-			config=self.agents_config['sales_rep_agent'],
+			config=self.agents_config['researcher'],
 			verbose=True
 		)
 
 	@agent
-	def lead_sales_rep_agent(self) -> Agent:
+	def reporting_analyst(self) -> Agent:
 		return Agent(
-			config=self.agents_config['lead_sales_rep_agent'],
+			config=self.agents_config['reporting_analyst'],
 			verbose=True
 		)
 
@@ -36,23 +35,21 @@ class CustomerOutreach():
 	# task dependencies, and task callbacks, check out the documentation:
 	# https://docs.crewai.com/concepts/tasks#overview-of-a-task
 	@task
-	def lead_profiling_task(self) -> Task:
+	def research_task(self) -> Task:
 		return Task(
-			config=self.tasks_config['lead_profiling_task'],
-			tools=[directory_read_tool,file_read_tool, search_tool]
+			config=self.tasks_config['research_task'],
 		)
 
 	@task
-	def personalized_outreach_task(self) -> Task:
+	def reporting_task(self) -> Task:
 		return Task(
-			config=self.tasks_config['personalized_outreach_task'],
-			tools=[sentiment_analysis_tool, search_tool],
+			config=self.tasks_config['reporting_task'],
 			output_file='report.md'
 		)
 
 	@crew
 	def crew(self) -> Crew:
-		"""Creates the CustomerOutreach crew"""
+		"""Creates the 01JobApplicationCrew crew"""
 		# To learn how to add knowledge sources to your crew, check out the documentation:
 		# https://docs.crewai.com/concepts/knowledge#what-is-knowledge
 
@@ -63,18 +60,3 @@ class CustomerOutreach():
 			verbose=True,
 			# process=Process.hierarchical, # In case you wanna use that instead https://docs.crewai.com/how-to/Hierarchical/
 		)
-
-import time
-from litellm.exceptions import RateLimitError
-
-def safe_llm_call(llm, **params):
-    wait_time = 7  # starting wait time in seconds
-    max_retries = 5
-    for attempt in range(max_retries):
-        try:
-            return llm(**params)
-        except RateLimitError as e:
-            print(f"Rate limit reached. Waiting for {wait_time} seconds before retrying...")
-            time.sleep(wait_time)
-            wait_time *= 2  # double the wait time for the next attempt
-    raise Exception("Exceeded maximum retry attempts due to rate limits.")
