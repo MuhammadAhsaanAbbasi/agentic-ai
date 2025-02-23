@@ -1,5 +1,5 @@
 [project]
-name = "01_job_application_crew"
+name = "job_application_crew"
 version = "0.1.0"
 description = "job_application_crew using crewAI"
 authors = [{ name = "Your Name", email = "you@example.com" }]
@@ -9,11 +9,11 @@ dependencies = [
 ]
 
 [project.scripts]
-01_job_application_crew = "01_job_application_crew.main:run"
-run_crew = "01_job_application_crew.main:run"
-train = "01_job_application_crew.main:train"
-replay = "01_job_application_crew.main:replay"
-test = "01_job_application_crew.main:test"
+job_application_crew = "job_application_crew.main:run"
+run_crew = "job_application_crew.main:run"
+train = "job_application_crew.main:train"
+replay = "job_application_crew.main:replay"
+test = "job_application_crew.main:test"
 
 [build-system]
 requires = ["hatchling"]

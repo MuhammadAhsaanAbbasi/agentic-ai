@@ -1,5 +1,6 @@
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
+from .tools.custom_tool import scrape_website_tool, search_tool, semantic_search_resumme, read_file_tool
 
 # If you want to run a snippet of code before or after the crew starts, 
 # you can use the @before_kickoff and @after_kickoff decorators
@@ -21,14 +22,31 @@ class JobApplicationCrew():
 	def researcher(self) -> Agent:
 		return Agent(
 			config=self.agents_config['researcher'],
-			verbose=True
+			tools=[scrape_website_tool, search_tool]
 		)
-
+	
 	@agent
-	def reporting_analyst(self) -> Agent:
+	def profiler(self) -> Agent:
 		return Agent(
-			config=self.agents_config['reporting_analyst'],
-			verbose=True
+			config=self.agents_config['profiler'],
+			tools=[scrape_website_tool, search_tool, 
+		  read_file_tool, semantic_search_resumme]
+		)
+	
+	@agent
+	def resume_strategist(self) -> Agent:
+		return Agent(
+			config=self.agents_config['resume_strategist'],
+			tools=[scrape_website_tool, search_tool, 
+		  read_file_tool, semantic_search_resumme]
+		)
+	
+	@agent
+	def interview_preparer(self) -> Agent:
+		return Agent(
+			config=self.agents_config['interview_preparer'],
+			tools=[scrape_website_tool, search_tool, 
+		  read_file_tool, semantic_search_resumme]
 		)
 
 	# To learn more about structured task outputs, 
@@ -41,10 +59,23 @@ class JobApplicationCrew():
 		)
 
 	@task
-	def reporting_task(self) -> Task:
+	def profile_task(self) -> Task:
 		return Task(
-			config=self.tasks_config['reporting_task'],
-			output_file='report.md'
+			config=self.tasks_config['profile_task']
+		)
+	
+	@task
+	def resume_strategy_task(self) -> Task:
+		return Task(
+			config=self.tasks_config['resume_strategy_task'],
+			context=["research_task", "profile_task"]
+		)
+
+	@task
+	def interview_preperation_task(self) -> Task:
+		return Task(
+			config=self.tasks_config['interview_preperation_task'],
+			context=["research_task", "profile_task", "resume_strategy_task"]
 		)
 
 	@crew

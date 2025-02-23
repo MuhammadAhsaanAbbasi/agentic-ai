@@ -1,17 +1,40 @@
 research_task:
   description: >
-    Conduct a thorough research about {topic}
-    Make sure you find any interesting and relevant information given
-    the current year is {current_year}.
+    Analyze the job posting URL provided ({job_posting_url})
+    to extract key skills, experiences & qualifications required.
+    Use the tools to gather content & Identify & categorize the requirements.
   expected_output: >
-    A list with 10 bullet points of the most relevant information about {topic}
-  agent: researcher
+    A structured list of job requirements, including necessary skills, qualifications & experiences
+  agent: researcher,
+  # async_execution: True
 
-reporting_task:
+profile_task:
   description: >
-    Review the context you got and expand each topic into a full section for a report.
-    Make sure the report is detailed and contains any and all relevant information.
+    Compile a detailed personal & professional profile using the GitHub ({github_url}) URLs,
+    & personal write-up ({personal_writeup}), Utilize tools to extract & synthesize information from these resources
   expected_output: >
-    A fully fledged report with the main topics, each with a full section of information.
-    Formatted as markdown without '```'
-  agent: reporting_analyst
+    A comprehensive profile document that includes skills, experiences, contributions
+    qualifications, interests & communication style,
+  agent: profiler
+  async_execution: True
+
+resume_strategy_task:
+  description: >
+    Using the profile & job requirements obtained from previouse tasks, tailor the resume to highlight the most relevant areas.
+    Employ tools to adjust & enhance the resume content. Make sure this is the best resume even but don't mmake up any information.
+    Update every section, including the initial summary, work experience, skills, & education.
+    All to better reflrect the candidates abilities & how it matches the job posting.
+  expected_output: >
+    An updated resume that effectively highlights the candidate's qualifications & experiences relevant to the job.
+  output_file: tailored_resume.pdf,
+  agent: resume_strategist
+
+interview_preperation_task:
+  description: >
+    Create a set of poetential interview questions & talking points based on the tailored resume & job requirements.
+    Utilize tools to generate relevant questions & discussion points. Make sure to used these quesitons & talking points
+    to help the candidate highlight the main points of the resume & how they align with the job posting.
+  expected_output: >
+    A document containing key questions and talking points that the candidate should prepare for the initial interview.
+  output_file: interview_questions.pdf,
+  agent: interview_preparer
