@@ -58,7 +58,7 @@ class JobApplicationCrew():
 			config=self.tasks_config['research_task'],
 		)
 
-	@task
+	@task 
 	def profile_task(self) -> Task:
 		return Task(
 			config=self.tasks_config['profile_task']
@@ -68,14 +68,12 @@ class JobApplicationCrew():
 	def resume_strategy_task(self) -> Task:
 		return Task(
 			config=self.tasks_config['resume_strategy_task'],
-			context=["research_task", "profile_task"]
 		)
 
 	@task
 	def interview_preperation_task(self) -> Task:
 		return Task(
 			config=self.tasks_config['interview_preperation_task'],
-			context=["research_task", "profile_task", "resume_strategy_task"]
 		)
 
 	@crew

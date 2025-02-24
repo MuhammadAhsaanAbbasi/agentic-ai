@@ -5,7 +5,7 @@ research_task:
     Use the tools to gather content & Identify & categorize the requirements.
   expected_output: >
     A structured list of job requirements, including necessary skills, qualifications & experiences
-  agent: researcher,
+  agent: researcher
   # async_execution: True
 
 profile_task:
@@ -26,7 +26,8 @@ resume_strategy_task:
     All to better reflrect the candidates abilities & how it matches the job posting.
   expected_output: >
     An updated resume that effectively highlights the candidate's qualifications & experiences relevant to the job.
-  output_file: tailored_resume.pdf,
+  context: [research_task, profile_task]
+  output_file: tailored_resume.md
   agent: resume_strategist
 
 interview_preperation_task:
@@ -36,5 +37,6 @@ interview_preperation_task:
     to help the candidate highlight the main points of the resume & how they align with the job posting.
   expected_output: >
     A document containing key questions and talking points that the candidate should prepare for the initial interview.
-  output_file: interview_questions.pdf,
+  context: [research_task, profile_task, resume_strategy_task]
+  output_file: interview_questions.md
   agent: interview_preparer

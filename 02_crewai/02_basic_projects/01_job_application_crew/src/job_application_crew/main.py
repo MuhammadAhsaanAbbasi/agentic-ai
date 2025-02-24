@@ -19,15 +19,13 @@ def run():
     """
     job_application_inputs = {
     'job_posting_url': 'https://jobs.lever.co/AIFund/6c82e23e-d954-4dd8-a734-c0c2c5ee00f1?lever-origin=applied&lever-source%5B%5D=AI+Fund',
-    'github_url': 'https://github.com/joaomdmoura',
-    'personal_writeup': """Noah is an accomplished Software
-    Engineering Leader with 18 years of experience, specializing in
-    managing remote and in-office teams, and expert in multiple
-    programming languages and frameworks. He holds an MBA and a strong
-    background in AI and data science. Noah has successfully led
-    major tech initiatives and startups, proving his ability to drive
-    innovation and growth in the tech industry. Ideal for leadership
-    roles that require a strategic and innovative approach."""
+    'github_url': 'http://github.com/muhammadAhsaanAbbasi',
+    'personal_writeup': """M.Ahsaan Abbasi is a Full Stack Developer with hands-on experience in 
+    React, Next.js, & JAMStack frameworks. I’m also proficient in Python, FastAPI, and the MERN Stack, 
+    as well as creating AI-driven solutions with LangChain and Large Language Models. I specialize in 
+    UI design with Tailwind CSS and have extensive experience setting up efficient CI/CD pipelines. 
+    My goal is always to integrate cutting-edge AI solutions that enhance user engagement and 
+    drive revenue."""
     }
     
     try:
