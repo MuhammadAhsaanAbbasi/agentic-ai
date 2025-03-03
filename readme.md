@@ -13,7 +13,7 @@ https://www.linkedin.com/posts/alexwang2911_aiagents-robotics-technology-activit
 
 ## Which is the Best Agentic Framework?
 
-Let's break down CrewAI, Autogen, and LangGraph for agentic development to help you decide which might be "better" for your needs.  There isn't a single "best" – it highly depends on what you prioritize in your agentic development project.
+Let's break down CrewAI, Autogen, LangGraph, Swarm & Phidata for agentic development to help you decide which might be "better" for your needs.  There isn't a single "best" – it highly depends on what you prioritize in your agentic development project.
 
 Here's a comparative look across several key dimensions:
 
