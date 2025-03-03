@@ -1,0 +1,103 @@
+news_topic_research_task:
+  description: >
+    Identify the five most discussed news topics in the last 24 hours related to {topic}. 
+    Ensure they are recent and come from reputable sources.
+  agent: news_topic_researcher_agent
+  expected_output: >
+    A list of exactly five trending topics related to {topic}, each written on a separate line.
+
+news_fetch_task:
+  description: >
+    Fetch top news stories & articles on given topics from past 24 hours,
+  expected_output: >
+    A list of top news stories & articles on given topics, each containing title, URL and a brief summary of each story
+    in a JSON format.
+  context: [news_topic_research_task]
+  agent: news_fetcher_agent
+
+news_analyzed_task:
+  description: >
+    Analyze each fetched news story, gather additional relevant information from the web, and ensure 
+    there are at least 5 well-formatted articles. Each article must have a clear structure, with a 
+    summary, key details, and an explanation of its significance.
+
+    Use external sources to validate and expand on the content where needed.
+
+  async_execution: True
+  expected_output: >
+    A well-structured markdown report analyzing each news article. Each analysis should include:
+
+    - **Title**: The main headline of the article.
+    - **Source & URL**: The original source and link to the full article.
+    - **Summary**: A concise overview of the article in 2-3 sentences.
+    - **Key Details**: Bullet points highlighting the most important aspects.
+    - **Additional Insights**: Any extra relevant context from external sources.
+    - **Why It Matters**: Explanation of the impact or significance of the news.
+
+    **Markdown Format Example Output:**
+    ```
+    ## AI Breakthrough in Quantum Computing
+
+    **🔗 Source:** [TechCrunch](https://example.com/article-link)
+
+    **📌 Summary:**  
+    Researchers have announced a significant breakthrough in quantum computing, achieving 
+    a record-breaking qubit stability time...
+
+    **📌 Key Details:**
+    - Scientists at MIT developed a new error-correction method...
+    - The new quantum chip can hold coherence for 10x longer...
+    - Experts say this could lead to major advancements in AI processing...
+
+    **📌 Additional Insights:**  
+    - Other researchers from Stanford have confirmed similar findings...  
+    - Industry analysts predict commercialization within the next 5 years...  
+
+    **📌 Why It Matters:**  
+    This breakthrough could revolutionize AI by enabling faster and more efficient computing power, 
+    reducing energy costs, and advancing scientific research.
+    ```
+
+  context: [news_fetch_task]
+  agent: news_analyzer_agent
+
+
+news_edit_task:
+  description: >
+    Proofread the news stories & articles for grammatical errors, ensuring they are engaging and informative.
+  expected_output: >
+    A well-written news story in markdown-formatted text that is ready for publication,
+    each news story including a rundown, detailed bullet points,
+    and a "Why it matters" section. There would be at least 5 articles, each in the proper format, Example Output:
+    """
+    ## Main Title \n\n
+    **Sub-heading \n\n
+    **sub-heading articles lines \n\n
+    **Details:** \n\n
+    - Details
+    **Why it matters: **
+    """
+  async_execution: False  # Changed from True to False to avoid chaining async tasks
+  context: [news_analyzed_task]
+  agent: news_editor_agent
+
+news_compile_task:
+  description: >
+    Compile the news stories & articles into a single markdown-formatted file.
+  expected_output: >
+    A complete newsletter in markdown format, with a consistent style and layout.
+    Example Output: 
+      '# Top stories in AI today:\\n\\n
+      - AI takes spotlight in Super Bowl commercials\\n\\n
+      - Altman seeks TRILLIONS for global AI chip initiative\\n\\n
+
+      ## AI takes spotlight in Super Bowl commercials\\n\\n
+      **The Rundown:** AI made a splash in this year\'s Super Bowl commercials...\\n\\n
+      **The details:**...\\n\\n
+      **Why it matters::**...\\n\\n
+      ## Altman seeks TRILLIONS for global AI chip initiative\\n\\n
+      **The Rundown:** OpenAI CEO Sam Altman is reportedly angling to raise TRILLIONS of dollars...\\n\\n
+      **The details:**...\\n\\n
+      **Why it matters::**...\\n\\n
+  context: [news_edit_task]
+  agent: news_compiler_agent
