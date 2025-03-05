@@ -1,4 +1,7 @@
 from crewai_tools import SerperDevTool, ScrapeWebsiteTool
+from dotenv import load_dotenv
+
+_=load_dotenv()
 
 search_tool = SerperDevTool()
 scrape_tool = ScrapeWebsiteTool()

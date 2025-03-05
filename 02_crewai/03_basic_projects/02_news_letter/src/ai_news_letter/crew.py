@@ -47,18 +47,11 @@ class AiNewsLetter():
 			tools=[search_tool, scrape_tool],
 			verbose=True
 		)
-
+	
 	@agent
 	def news_editor_agent(self) -> Agent:
 		return Agent(
 			config=self.agents_config['news_editor_agent'],
-			verbose=True
-		)
-	
-	@agent
-	def news_compiler_agent(self) -> Agent:
-		return Agent(
-			config=self.agents_config['news_compiler_agent'],
 			verbose=True
 		)
 
@@ -87,13 +80,6 @@ class AiNewsLetter():
 	def news_edit_task(self) -> Task:
 		return Task(
 			config=self.tasks_config['news_edit_task'],
-		)
-	
-	@task
-	def news_compile_task(self) -> Task:
-		return Task(
-			config=self.tasks_config['news_compile_task'],
-			output_file='today_news.md'
 		)
 
 	@crew
