@@ -6,7 +6,7 @@ from crewai.project import CrewBase, agent, crew, task
 # https://docs.crewai.com/concepts/crews#example-crew-class-with-decorators
 
 @CrewBase
-class 03YoutubeAutomate():
+class YoutubeAutomate():
 	"""03YoutubeAutomate crew"""
 
 	# Learn more about YAML configuration files here:
