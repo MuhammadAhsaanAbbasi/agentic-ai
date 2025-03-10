@@ -8,7 +8,7 @@ dependencies = [
     "crewai[tools]>=0.100.1,<1.0.0"
 ]
 
-[project.scripts]
+[tool.poetry.scripts]
 job_application_crew = "job_application_crew.main:run"
 run_crew = "job_application_crew.main:run"
 train = "job_application_crew.main:train"

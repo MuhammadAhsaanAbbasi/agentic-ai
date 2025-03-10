@@ -6,8 +6,8 @@ from crewai.project import CrewBase, agent, crew, task
 # https://docs.crewai.com/concepts/crews#example-crew-class-with-decorators
 
 @CrewBase
-class YoutubeAutomate():
-	"""03YoutubeAutomate crew"""
+class YoutubeAutomationCrew():
+	"""YoutubeAutomationCrew crew"""
 
 	# Learn more about YAML configuration files here:
 	# Agents: https://docs.crewai.com/concepts/agents#yaml-configuration-recommended
@@ -49,7 +49,7 @@ class YoutubeAutomate():
 
 	@crew
 	def crew(self) -> Crew:
-		"""Creates the 03YoutubeAutomate crew"""
+		"""Creates the YoutubeAutomationCrew crew"""
 		# To learn how to add knowledge sources to your crew, check out the documentation:
 		# https://docs.crewai.com/concepts/knowledge#what-is-knowledge
 
