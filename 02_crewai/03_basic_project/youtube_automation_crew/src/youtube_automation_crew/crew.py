@@ -1,9 +1,40 @@
-from crewai import Agent, Crew, Process, Task
+from crewai import Agent, Crew, Process, Task, LLM
 from crewai.project import CrewBase, agent, crew, task
+from langchain_community.tools.human.tool import HumanInputRun
+from langchain_openai import ChatOpenAI
+from dotenv import load_dotenv
+from youtube_automation_crew.tools.youtube_video_detail_tool import YouTubeVideoDetailsTool
+from youtube_automation_crew.tools.youtube_search_tool import YoutubeVideoSearchTool
+import os
 
+youtube_video_search_tool = YoutubeVideoSearchTool()
+youtube_video_details_tool = YouTubeVideoDetailsTool()
+
+from crewai.tools import BaseTool
+from langchain_community.tools.human.tool import HumanInputRun
+
+class MyCustomHumanTool(BaseTool):
+    name: str = "Human Input Tool"
+    description: str = "Ask a human for guidance when stuck."
+    
+    def _run(self, query: str) -> str:
+        # Instantiate the native human tool and invoke it with the query.
+        human_tool = HumanInputRun()
+        response = human_tool.invoke(query)
+        return response
+
+
+
+_ = load_dotenv()
+openai_llm = ChatOpenAI(model_name="gpt-4o-mini")
 # If you want to run a snippet of code before or after the crew starts, 
 # you can use the @before_kickoff and @after_kickoff decorators
 # https://docs.crewai.com/concepts/crews#example-crew-class-with-decorators
+
+model = os.getenv("MODEL")
+api_key=os.getenv("GEMINI_API_KEY")
+
+llm = LLM(model=model, api_key=api_key)
 
 @CrewBase
 class YoutubeAutomationCrew():
@@ -16,35 +47,76 @@ class YoutubeAutomationCrew():
 	tasks_config = 'config/tasks.yaml'
 
 	# If you would like to add tools to your agents, you can learn more about it here:
-	# https://docs.crewai.com/concepts/agents#agent-tools
-	@agent
-	def researcher(self) -> Agent:
-		return Agent(
-			config=self.agents_config['researcher'],
-			verbose=True
-		)
+	# https://docs.crewai.com/concepts/agents#agent-tool
 
 	@agent
-	def reporting_analyst(self) -> Agent:
+	def research_manager(self) -> Agent:
 		return Agent(
-			config=self.agents_config['reporting_analyst'],
-			verbose=True
+			config=self.agents_config['research_manager'],
+			llm=llm,
+			tools=[youtube_video_search_tool, youtube_video_details_tool]
+		)
+	
+	@agent
+	def title_creator(self) -> Agent:
+		return Agent(
+			config=self.agents_config['title_creator'],
+			llm=llm,
+		)
+	
+	@agent
+	def description_creator(self) -> Agent:
+		return Agent(
+			config=self.agents_config['description_creator'],
+			llm=llm,
+		)
+	
+	@agent
+	def email_creator(self) -> Agent:
+		return Agent(
+			config=self.agents_config['email_creator'],
+			llm=llm,
+			tools=[MyCustomHumanTool()]
+		)
+	
+	@agent
+	def youtube_manager(self) -> Agent:
+		return Agent(
+			config=self.agents_config['youtube_manager'],
+			llm=llm,
 		)
 
 	# To learn more about structured task outputs, 
 	# task dependencies, and task callbacks, check out the documentation:
 	# https://docs.crewai.com/concepts/tasks#overview-of-a-task
 	@task
-	def research_task(self) -> Task:
+	def manage_youtube_video_research(self) -> Task:
 		return Task(
-			config=self.tasks_config['research_task'],
+			config=self.tasks_config['manage_youtube_video_research'],
 		)
 
 	@task
-	def reporting_task(self) -> Task:
+	def create_youtube_video_title(self) -> Task:
 		return Task(
-			config=self.tasks_config['reporting_task'],
-			output_file='report.md'
+			config=self.tasks_config['create_youtube_video_title'],
+		)
+	
+	@task
+	def create_youtube_video_description(self) -> Task:
+		return Task(
+			config=self.tasks_config['create_youtube_video_description'],
+		)
+	
+	@task
+	def create_email_announcement(self) -> Task:
+		return Task(
+			config=self.tasks_config['create_email_announcement'],
+		)
+	
+	@task
+	def manage_youtube_video_creation(self) -> Task:
+		return Task(
+			config=self.tasks_config['manage_youtube_video_creation'],
 		)
 
 	@crew
@@ -56,7 +128,8 @@ class YoutubeAutomationCrew():
 		return Crew(
 			agents=self.agents, # Automatically created by the @agent decorator
 			tasks=self.tasks, # Automatically created by the @task decorator
-			process=Process.sequential,
+			process=Process.hierarchical,
+			manager_llm=openai_llm,
 			verbose=True,
 			# process=Process.hierarchical, # In case you wanna use that instead https://docs.crewai.com/how-to/Hierarchical/
 		)

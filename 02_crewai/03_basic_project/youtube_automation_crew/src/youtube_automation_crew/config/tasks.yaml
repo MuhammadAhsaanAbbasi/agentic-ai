@@ -1,17 +1,161 @@
-research_task:
+manage_youtube_video_research:
   description: >
-    Conduct a thorough research about {topic}
-    Make sure you find any interesting and relevant information given
-    the current year is {current_year}.
-  expected_output: >
-    A list with 10 bullet points of the most relevant information about {topic}
-  agent: researcher
+    Conduct research on YouTube to identify at least 15 high-performing videos related to the given video topic. 
+    Once identified, extract key video details to complete the research CSV, which will be used by other agents 
+    to generate optimized titles, descriptions, and other aspects of the new YouTube video.
 
-reporting_task:
-  description: >
-    Review the context you got and expand each topic into a full section for a report.
-    Make sure the report is detailed and contains any and all relevant information.
+    The research CSV should include the following details:
+    - Video Title
+    - View Count
+    - Days Since Published
+    - Channel Subscriber Count
+    - Video URL
+
+    Video Topic: {video_topic}  
+    Video Description: {video_details}
+
+    Important Notes:
+    - Ensure the CSV uses a semicolon (`;`) as the delimiter.
+    - Avoid duplicate video entries in the research CSV.
+    - Verify the accuracy of all collected data, including view counts and subscriber counts.
+    - Only include real YouTube videos with valid URLs.
+
   expected_output: >
-    A fully fledged report with the main topics, each with a full section of information.
-    Formatted as markdown without '```'
-  agent: reporting_analyst
+    Video Title; View Count; Days Since Published; Channel Subscriber Count; Video URL
+    How to Make a YouTube Video; 100,000; 30; 10,000; https://www.youtube.com/watch?v=1234
+    10 Tips for YouTube Video Success; 200,000; 45; 20,000; https://www.youtube.com/watch?v=5678
+    ...
+  agent: research_manager
+
+
+create_youtube_video_title:
+  description: >
+    Generate 10 potential high-converting video titles based on the given video topic and description.  
+    Utilize research data from high-performing YouTube videos to enhance the quality of the titles.  
+    Titles should be **less than 70 characters** and **optimized for high click-through rates (CTR).**
+
+    Video Topic: {video_topic}  
+    Video Description: {video_details}
+
+  expected_output: >
+    - CrewAI Tutorial for Beginners: Learn How to Use the Latest CrewAI Features
+    - CrewAI Crash Course: Master CrewAI in Just 10 Minutes!
+    - How to Automate Your Workflow Using CrewAI
+    - CrewAI: The Ultimate AI Automation Tool Explained!
+    - 10 Game-Changing CrewAI Tips You Need to Know!
+    ...
+  agent: title_creator
+
+
+create_youtube_video_description:
+  description: >
+    Write a **compelling, SEO-optimized YouTube video description** based on the given topic and details.  
+    Leverage insights from previously researched videos to enhance the description’s quality.  
+    The description must be **concise (under 500 characters), engaging, and keyword-optimized** for searchability.
+
+    Video Topic: {video_topic}  
+    Video Description: {video_details}
+
+  expected_output: >
+    🤖 Learn how to automate workflows with CrewAI!  
+    Download the CrewAI source code here: https://brandonhancock.io/crewai-updated-tutorial-hierarchical  
+
+    Don't forget to **Like, Subscribe, and turn on Notifications** for more AI automation content!  
+
+    Join the AI Developer Accelerator Community for FREE:  
+    🔗 https://www.skool.com/ai-developers-9308  
+
+    In this video, you’ll learn how to build your own **AI-powered CrewAI workforce**, automate tasks, and optimize your workflow.  
+    Whether you're a developer, marketer, or entrepreneur, this guide will help you maximize efficiency with AI-driven automation!  
+
+    📰 Stay connected:  
+    🔗 LinkedIn: https://www.linkedin.com/in/brandon-hancock-ai/  
+    🔗 Twitter: https://twitter.com/bhancock_ai  
+  agent: description_creator
+
+
+create_email_announcement:
+  description: >
+    Write a **well-structured, engaging email** to promote the new YouTube video.  
+    Maintain the existing style, tone, and voice used in previous email announcements.  
+    After drafting, **a human must review your final email before sending it.**
+
+    Video Topic: {video_topic}  
+    Video Description: {video_details}  
+
+    Use the following past email announcements as a reference for structure and tone.
+
+  expected_output: >
+    **Subject:** 🚀 New CrewAI Tutorial: Unlock the Latest Features!  
+
+    **Hey [FIRST NAME]!**  
+
+    Exciting news! CrewAI just got even better with new features that will **revolutionize your automation workflows.**  
+    You loved our first CrewAI tutorial, so we’ve launched a brand-new one just for you!  
+
+    🎥 **Watch the New Tutorial Here** → [VIDEO PREVIEW]  
+
+    Here’s what you’ll learn:  
+    ✅ How to set up CrewAI's **new hierarchical workflow**  
+    ✅ The power of **asynchronous tasks for efficiency**  
+    ✅ How the **Expected Output feature improves accuracy**  
+    ✅ And much more!  
+
+    Don't miss out! **Watch the tutorial now** and take your AI automation skills to the next level.  
+
+    **[WATCH NOW]**  
+
+    Happy coding!  
+    **Cheers,**  
+    **M. Ahsaan Abbasi**  
+  agent: email_creator
+
+
+manage_youtube_video_creation:
+  description: >
+    **Oversee the complete YouTube video preparation process**, ensuring all elements—research,  
+    title creation, description writing, and email drafting—are properly structured for maximum engagement.  
+    Your final deliverable is a **comprehensive, well-organized report** that includes:  
+
+    - A research table with 15 high-performing YouTube videos.  
+    - 10 high-CTR potential titles.  
+    - A fully formatted, SEO-optimized YouTube video description.  
+    - A promotional email announcement.  
+
+    **Video Topic:** {video_topic}  
+    **Video Description:** {video_details}  
+
+    📌 **Important Notes:**  
+    - Follow the provided example report format.  
+    - Ensure the final report contains **15 videos**, **10 high-CTR titles**, a complete **YouTube description**, and a **marketing email**.  
+
+  expected_output: >
+    **# YouTube Research Table:**  
+    - **Video 1:**  
+      - Title: "How to Make a YouTube Video"  
+      - View Count: 100,000  
+      - Days Since Published: 30  
+      - Channel Subscriber Count: 10,000  
+      - Video URL: https://www.youtube.com/watch?v=1234  
+    - **Video 2:**  
+      - Title: "10 Tips for YouTube Video Success"  
+      - View Count: 200,000  
+      - Days Since Published: 45  
+      - Channel Subscriber Count: 20,000  
+      - Video URL: https://www.youtube.com/watch?v=5678  
+    - … **(Include 15 total videos)**  
+
+    **# 10 High-CTR Title Suggestions:**  
+    - "How to Make a YouTube Video in 2024!"  
+    - "10 Proven Strategies for Growing a YouTube Channel"  
+    - "YouTube SEO Tips: How to Rank #1 on YouTube"  
+    - … **(Include 10 titles)**  
+
+    **# YouTube Video Description:**  
+    (Include a structured description with CTA, hashtags, and relevant links)  
+
+    **# Email Announcement:**  
+    (Include a fully written email matching previous announcement styles)  
+
+  agent: youtube_manager
+  output_file: youtube_video_report.txt  

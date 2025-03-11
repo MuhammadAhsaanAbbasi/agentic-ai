@@ -18,12 +18,18 @@ def run():
     Run the crew.
     """
     inputs = {
-        'topic': 'AI LLMs',
-        'current_year': str(datetime.now().year)
+        'video_topic': 'Build AI Agents that EVOLVE Over Time',
+        'video_details': """One of the biggest advantages of building AI agents over traditional automations is that they are supposed to act more like a human. But for being so human, they sure have a pretty terrible memory most of the time.
+
+        We want our agents to get smarter over time through interacting with us - remembering goals, instructions, corrections, our preferences, etc.
+
+        This kind of long term memory is when you really start to take your agents to the next level of personalization and human like behavior. In this video, I’ll show you step by step how to build these self-learning AI agents using an open source Python library called Mem0 which is specifically built for this purpose.
+"""
     }
     
     try:
-        YoutubeAutomationCrew().crew().kickoff(inputs=inputs)
+        result = YoutubeAutomationCrew().crew().kickoff(inputs=inputs)
+        print(f"Response: {result}")
     except Exception as e:
         raise Exception(f"An error occurred while running the crew: {e}")
 
