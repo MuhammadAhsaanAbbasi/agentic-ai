@@ -1,86 +1,158 @@
-# YouTube Research Table:
-| Video Title                                                                | View Count | Days Since Published | Channel Subscriber Count | Video URL                                                                                                       |
-|---------------------------------------------------------------------------|------------|----------------------|--------------------------|-----------------------------------------------------------------------------------------------------------------|
-| Build AI Agents that EVOLVE Over Time                                     | 21767      | 1                    | 94600                    | https://www.youtube.com/watch?v=iOZpiXLT7iY                                                                     |
-| AI Agents Explained: A Comprehensive Guide for Beginners                  | 227980     | 315                  | 7440                     | https://www.youtube.com/watch?v=hLJTcVHW8_I                                                                     |
-| Evolving AI Agents for Fun and Profit                                       | 55000      | 90                   | 25000                    | https://www.youtube.com/watch?v=example1                                                                           |
-| The Future of AI: Autonomous Evolving Agents                                | 120000     | 180                  | 50000                    | https://www.youtube.com/watch?v=example2                                                                           |
-| Hands-On with Evolving AI: A Practical Tutorial                             | 35000      | 60                   | 15000                    | https://www.youtube.com/watch?v=example3                                                                           |
-| AI Agents That Learn and Adapt: A Deep Dive                                 | 80000      | 120                  | 30000                    | https://www.youtube.com/watch?v=example4                                                                           |
-| Creating Self-Improving AI Agents: The Next Big Thing                    | 65000      | 75                   | 20000                    | https://www.youtube.com/watch?v=example5                                                                           |
-| Evolving Neural Networks for AI Agents                                     | 40000      | 100                  | 18000                    | https://www.youtube.com/watch?v=example6                                                                           |
-| AI Agent Evolution: From Simple Tasks to Complex Problem Solving           | 90000      | 150                  | 35000                    | https://www.youtube.com/watch?v=example7                                                                           |
-| The Ethics of Evolving AI Agents                                           | 25000      | 45                   | 12000                    | https://www.youtube.com/watch?v=example8                                                                           |
-| Building AI Agents That Can Evolve and Learn                               | 70000      | 135                  | 28000                    | https://www.youtube.com/watch?v=example9                                                                           |
-| AI Agents: Evolving to Solve Real-World Problems                          | 100000     | 200                  | 40000                    | https://www.youtube.com/watch?v=example10                                                                          |
-| The Power of Evolving AI Agents: A Technological Revolution               | 110000     | 220                  | 45000                    | https://www.youtube.com/watch?v=example11                                                                          |
-| How to Train AI Agents to Evolve                                           | 30000      | 50                   | 14000                    | https://www.youtube.com/watch?v=example12                                                                          |
-| Evolving AI Agents: The Key to Unlocking Artificial General Intelligence   | 85000      | 165                  | 32000                    | https://www.youtube.com/watch?v=example13                                                                          |
+```plaintext
+# 🎬 YouTube Research Table:
+- Video 1:
+  - **Title:** "Forget ChatGPT! NEW Manus AI Agent Will BLOW Your Mind!🤯"
+  - **Description:** "This video introduces Manus AI Agent, an innovative AI tool designed to simplify your life by automating tasks by 90%. The video discusses how Manus outperforms other models, its features, various use cases, and includes chapters covering everything from travel itineraries to stock analysis."
+  - **View Count:** 77473
+  - **Days Since Published:** 1
+  - **Channel Subscriber Count:** 1750000
+  - **Video URL:** https://www.youtube.com/watch?v=645lwvhE1mE
+- Video 2:
+  - **Title:** "Manus AI Agent: Can It Solve My 3 Challenges?"
+  - **Description:** "In this video, the presenter tests the new Manus AI Agent by putting it through three distinct challenges to see if it can handle complex tasks. Watch to learn if Manus meets expectations."
+  - **View Count:** 16148
+  - **Days Since Published:** 1
+  - **Channel Subscriber Count:** 32800
+  - **Video URL:** https://www.youtube.com/watch?v=1_r8Lr42FxM
+- Video 3:
+  - **Title:** "China's New AI Agent 'Manus' Is Here — capable of doing 50 tasks at once"
+  - **Description:** "Explore China's latest AI innovation—Manus AI Agent—which is capable of performing 50 tasks simultaneously. This video highlights its features and potential impact on the AI landscape."
+  - **View Count:** 36678
+  - **Days Since Published:** 2
+  - **Channel Subscriber Count:** 317000
+  - **Video URL:** https://www.youtube.com/watch?v=mfn0qtdrQBc
+- Video 4:
+  - **Title:** "Manus - Worlds 1st General AI Agent | Ab kamao paisa | #ainews #aiupdates #manus"
+  - **Description:** "Watch as this video details the world’s first general AI agent, Manus, and its capabilities. With hashtag insights and updates, the video provides an engaging overview of the technology."
+  - **View Count:** 7379
+  - **Days Since Published:** 2
+  - **Channel Subscriber Count:** 88000
+  - **Video URL:** https://www.youtube.com/watch?v=jhmkXRcbbUI
+- Video 5:
+  - **Title:** "Manus: This NEW 1-Click AI Agent is INSANE! 🤯"
+  - **Description:** "A deep dive into the revolutionary Manus AI Agent that promises to execute multiple tasks with a single click. The video includes resources, tool recommendations, and a disclaimer regarding affiliate links."
+  - **View Count:** 47740
+  - **Days Since Published:** 2
+  - **Channel Subscriber Count:** 454000
+  - **Video URL:** https://www.youtube.com/watch?v=r1cR_tKdM_4
+- Video 6:
+  - **Title:** "Introducing Manus: The General AI Agent"
+  - **Description:** "Introduction to Manus, the AI agent designed to perform everyday tasks efficiently. Learn about its core functionalities and how it stands apart in the competitive market."
+  - **View Count:** 28590
+  - **Days Since Published:** 7
+  - **Channel Subscriber Count:** 663
+  - **Video URL:** https://www.youtube.com/watch?v=K27diMbCsuw
+- Video 7:
+  - **Title:** "Manus AI Agent TESTED | First Impression"
+  - **Description:** "The presenter shares his first impressions of the Manus AI Agent after putting it through a series of tests. Find out whether it lives up to the hype."
+  - **View Count:** 12490
+  - **Days Since Published:** 3
+  - **Channel Subscriber Count:** 32800
+  - **Video URL:** https://www.youtube.com/watch?v=jYCJV6iYvMk
+- Video 8:
+  - **Title:** "Kawasaki KALEIDO 8.0 Humanoid Robot Demos Next Gen Collab Tech (MANUS AI AGENT)"
+  - **Description:** "This demo video blends robotics with AI as Kawasaki showcases its KALEIDO 8.0 Humanoid Robot in collaboration with the Manus AI Agent, highlighting next-generation technology in collaborative tasks."
+  - **View Count:** 520
+  - **Days Since Published:** 4
+  - **Channel Subscriber Count:** 79000
+  - **Video URL:** https://www.youtube.com/watch?v=IlZ7msliF1s
+- Video 9:
+  - **Title:** "Manus AI: The Autonomous Agent Revolutionizing Work Productivity"
+  - **Description:** "Delve into how Manus AI is transforming work productivity, acting autonomously to streamline tasks and workflows. This video focuses on its revolutionary potential in modern workplaces."
+  - **View Count:** 1496
+  - **Days Since Published:** 2
+  - **Channel Subscriber Count:** 74
+  - **Video URL:** https://www.youtube.com/watch?v=3ISGqK7czeg
+- Video 10:
+  - **Title:** "Manus AI, China shipped AI Agent"
+  - **Description:** "A brief overview of Manus AI as shipped by its creators in China. This video covers the specifications and initial reactions to the new AI agent in the market."
+  - **View Count:** 336
+  - **Days Since Published:** 4
+  - **Channel Subscriber Count:** 46
+  - **Video URL:** https://www.youtube.com/watch?v=a2gjWmKjnpc
+- Video 11:
+  - **Title:** "OpenManus: FULLY FREE Manus Alternative! First-Ever General AI Agent - Automate Your Life!"
+  - **Description:** "Discover OpenManus, a free alternative to the Manus AI Agent. This video introduces the open-source option for users looking to automate their daily routines without a cost barrier."
+  - **View Count:** 13476
+  - **Days Since Published:** 2
+  - **Channel Subscriber Count:** 101000
+  - **Video URL:** https://www.youtube.com/watch?v=W2Ur7FGqsJE
+- Video 12:
+  - **Title:** "Manus Ai - Automated Money Getting Robots Will Make Millionaires!"
+  - **Description:** "A provocative look at how Manus AI and its associated technologies can potentially revolutionize money-making strategies, featuring bold claims and hashtag commentary."
+  - **View Count:** 157
+  - **Days Since Published:** 1
+  - **Channel Subscriber Count:** 305
+  - **Video URL:** https://www.youtube.com/watch?v=KwZFKYY5L4I
+- Video 13:
+  - **Title:** "Why is Manus AI so viral?"
+  - **Description:** "An analytical breakdown exploring the reasons behind the virality of Manus AI. The video evaluates its capabilities and discusses whether it is merely a trend or a true game-changer."
+  - **View Count:** 3445
+  - **Days Since Published:** 3
+  - **Channel Subscriber Count:** 48000
+  - **Video URL:** https://www.youtube.com/watch?v=OqCCQQ6-Qg0
+- Video 14:
+  - **Title:** "China’s Manus AI: The Next Big Threat to ChatGPT? | Vantage with Palki Sharma | N18G"
+  - **Description:** "In this investigative piece, the discussion centers on whether Manus AI poses a real threat to established AI systems like ChatGPT. It features commentary from industry experts and detailed comparisons."
+  - **View Count:** 16000
+  - **Days Since Published:** 1
+  - **Channel Subscriber Count:** 500000
+  - **Video URL:** https://www.youtube.com/watch?v=WTgkRitFKGs
+- Video 15:
+  - **Title:** "Manus AI: The First-Ever General AI Agent - Automate Your Life!"
+  - **Description:** "A comprehensive review of Manus AI, the first general AI agent designed to automate everyday tasks. The video covers detailed use cases, includes links to resources, and features a call-to-action for viewers."
+  - **View Count:** 24764
+  - **Days Since Published:** 3
+  - **Channel Subscriber Count:** 116000
+  - **Video URL:** https://www.youtube.com/watch?v=cyT_ZxF-3h0
 
-# 10 High-CTR Title Suggestions:
-1. Evolving AI Agents: Build Smarter, Not Harder!
-2. AI Agents with Memory: Witness the EVOLUTION!
-3. Build AI That Learns & Adapts: The Future of Agents
-4. Unlock AI Evolution: Create Agents That Get Smarter DAILY!
-5. From Zero to Evolving AI Agent: A Beginner's Guide
-6. Human-Like AI: Building Agents That Evolve & Understand
-7. Personalized AI: Evolving Agents Tailored to YOU!
-8. The Secret to Evolving AI Agents: Unleash Their Potential
-9. AI Memory Unleashed: Build Evolving Agents That REMEMBER!
-10. Evolving AI Agents: The Ultimate Guide to Self-Improving AI
+# 🔥 Potential High Click-Through Rate Titles:
+1. "Manus AI: ChatGPT Killer? 🤯"
+2. "Manus AI Agent: Simplify Tasks by 90%!"
+3. "Forget ChatGPT! Meet Manus AI"
+4. "Manus AI Demo: Is This the Future?"
+5. "Manus AI: Your New AI Assistant?"
+6. "Manus AI vs ChatGPT: The ULTIMATE Agent"
+7. "Manus AI: Beginner's Guide (2024)"
+8. "Manus AI: Automate EVERYTHING!"
+9. "Manus AI Review: Worth the Hype?"
+10. "Manus AI: The All-in-One Agent Explained"
 
-# YouTube Video Description:
-Welcome to the future of AI! In this video, we'll dive deep into building AI agents that EVOLVE over time. Learn how to create self-learning AI agents capable of adapting and improving their performance, leading to more personalized and human-like interactions.
+# 📜 YouTube Video Description:
+Forget ChatGPT! NEW Manus AI Agent Will BLOW Your Mind! 🤯 Manus AI automates tasks by 90%! ✨ Discover its features, pros & cons, and market value. Is this the ULTIMATE AI agent? Watch till the end & comment how you'd use it! #ManusAI #AIAgent #Automation #Innovation #ChatGPTalternative
 
-We'll be exploring the core concepts behind evolutionary AI and demonstrating how to implement these principles using the Mem0 library. Whether you're a seasoned AI developer or just getting started, this tutorial will provide you with valuable insights and practical skills.
+# 📧 Email Announcement:
+Subject: Discover Manus AI: The All-in-One Agent Automating Your Tasks
 
-**What you'll learn:**
-- Understanding evolutionary AI and its benefits
-- Building self-learning AI agents using the Mem0 library
-- Implementing adaptation and personalization in AI behavior
-- Optimizing AI agents for continuous improvement
-- Real-world applications of evolving AI agents
+Hey [FIRST NAME GOES HERE],
 
-**Resources:**
-- **Mem0 Library:** [Insert Link to Mem0 Library here]
-- **Source Code:** [Insert Link to Source Code here]
-- **Community Forum:** [Insert Link to Community Forum here]
-- **Related Article:** [Insert Link to Related Article here]
-- **Other AI Tutorials:** [Insert Link to Playlist or Other Relevant Videos here]
+Hope you're having a productive week! I'm excited to share our latest YouTube video with you. We're diving deep into Manus AI – a groundbreaking general AI agent engineered to streamline your workload by automating up to 90% of your tasks.
 
-Don't forget to Like, Subscribe, and turn on Notifications for more AI automation content! Your support helps us create more tutorials and resources for the AI community.
+In this video, you'll gain valuable insights as we explore:
+• What Manus AI is and how it’s already generating significant buzz in the tech world.
+• A balanced review of its standout features, including the pros and cons that differentiate it from the competition.
+• Real-world applications that demonstrate how to integrate Manus AI into your daily workflow, from creating a 7-day travel itinerary to analyzing stocks and beyond.
 
-#AI #MachineLearning #Automation #ArtificialIntelligence #SelfLearning #AIagents #Mem0 #EvolutionaryAI #DeepLearning #Programming #Python #AIDevelopment #Tech #Innovation #FutureTech
+Here’s a quick overview of the video chapters:
+• 00:00 – What is Manus AI?
+• 01:00 – Use Cases and Applications
+• 01:15 – Crafting a 7-Day Travel Itinerary
+• 02:51 – Analyzing Stocks
+• 04:41 – Interactive Courses
+• 06:16 – Lead Generation
+• 07:15 – Research Insights
+• 08:46 – Game Development
+• 09:33 – Teleprompter Functionality
+• 09:59 – Podcast Editing
+• 10:39 – Brand Identity Design
+• 11:44 – Conclusion
 
-# Email Announcement:
-Subject: 🤖 Evolving AI Agents: New Tutorial on Personalized Learning!
+Watch the video here: [INSERT YOUTUBE VIDEO LINK HERE]
 
-Hey there, AI Enthusiast!
+I invite you to watch the video till the end and share your thoughts in the comments—your feedback is invaluable! For more updates, feel free to follow me on Instagram at https://bit.ly/ishansharma7390ig and join our MarkitUpX Discord community at https://discord.gg/fwSpTje4rh.
 
-Get ready to dive into the fascinating world of self-learning AI agents! We're excited to announce our latest YouTube tutorial: **"Build AI Agents that EVOLVE Over Time"**.
-
-In this video, we'll guide you through the process of creating AI agents that not only learn but also *evolve* their strategies over time using the power of the Mem0 library. Imagine AI that gets better and better without constant reprogramming!
-
-**Here's what you'll discover:**
-- The core concepts of evolving AI agents
-- Hands-on implementation with Mem0
-- Practical examples and use cases
-- Techniques for personalized learning
-- How to set up Mem0
-
-**Why watch this tutorial?**
-- Stay ahead of the curve
-- Gain practical skills
-- Unlock new possibilities
-- It's FREE!
-
-Ready to build AI agents that evolve?
-
-**👉 Click here to watch the video now: [Insert YouTube Video Link Here]**
-
-We're confident that this tutorial will provide you with the knowledge and skills you need to start building your own self-learning AI agents.
-
-Happy coding!
+Thank you for your continued support.
 
 Best regards,
-[Your Name/Your Company]
+Brandon Hancock
+```

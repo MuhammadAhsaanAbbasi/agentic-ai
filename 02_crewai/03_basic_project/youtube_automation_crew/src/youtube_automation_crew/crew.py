@@ -26,13 +26,14 @@ class MyCustomHumanTool(BaseTool):
 
 
 _ = load_dotenv()
-openai_llm = ChatOpenAI(model_name="gpt-4o-mini")
 # If you want to run a snippet of code before or after the crew starts, 
 # you can use the @before_kickoff and @after_kickoff decorators
-# https://docs.crewai.com/concepts/crews#example-crew-class-with-decorators
+# https://docs.crewai.com/concepts/crews#example-rew-class-with-decorators
 
 model = os.getenv("MODEL")
 api_key=os.getenv("GEMINI_API_KEY")
+openai_api_key=os.getenv("OPENAI_API_KEY")
+manager_llm = ChatOpenAI(model="o3-mini-2025-01-31", api_key=openai_api_key) 
 
 llm = LLM(model=model, api_key=api_key)
 
@@ -50,9 +51,9 @@ class YoutubeAutomationCrew():
 	# https://docs.crewai.com/concepts/agents#agent-tool
 
 	@agent
-	def research_manager(self) -> Agent:
+	def youtube_researcher(self) -> Agent:
 		return Agent(
-			config=self.agents_config['research_manager'],
+			config=self.agents_config['youtube_researcher'],
 			llm=llm,
 			tools=[youtube_video_search_tool, youtube_video_details_tool]
 		)
@@ -90,9 +91,9 @@ class YoutubeAutomationCrew():
 	# task dependencies, and task callbacks, check out the documentation:
 	# https://docs.crewai.com/concepts/tasks#overview-of-a-task
 	@task
-	def manage_youtube_video_research(self) -> Task:
+	def youtube_video_research(self) -> Task:
 		return Task(
-			config=self.tasks_config['manage_youtube_video_research'],
+			config=self.tasks_config['youtube_video_research'],
 		)
 
 	@task
@@ -129,7 +130,7 @@ class YoutubeAutomationCrew():
 			agents=self.agents, # Automatically created by the @agent decorator
 			tasks=self.tasks, # Automatically created by the @task decorator
 			process=Process.hierarchical,
-			manager_llm=openai_llm,
+			manager_llm=manager_llm,
 			verbose=True,
 			# process=Process.hierarchical, # In case you wanna use that instead https://docs.crewai.com/how-to/Hierarchical/
 		)

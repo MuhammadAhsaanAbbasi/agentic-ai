@@ -8,6 +8,7 @@ import requests
 class VideoDetails(BaseModel):
     """Model for a single video search result."""
     title: str
+    description: str
     view_count: int
     like_count: int
     dislike_count: int
@@ -62,6 +63,7 @@ class YouTubeVideoDetailsTool(BaseTool):
         return [
             VideoDetails(
                 title=snippet['title'],
+                description=snippet['description'],
                 view_count=int(statistics['viewCount']),
                 like_count=int(statistics['likeCount']),
                 dislike_count=int(statistics.get("dislikeCount", 0)),
