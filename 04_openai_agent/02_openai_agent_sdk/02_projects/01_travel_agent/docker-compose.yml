@@ -1,0 +1,13 @@
+version: "3.9"
+
+name: travel_agent
+services:
+  chatbot-service:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "8501:8501"
+    environment:
+      - OPENAI_API_KEY=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
+      - RAPID_API_KEY="fc39528b12msh1ae8e1931a36056p14d208jsna507409155f5"

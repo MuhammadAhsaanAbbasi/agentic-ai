@@ -10,7 +10,8 @@ requires-python = ">=3.12"
 dependencies = [
     "openai-agents (>=0.0.5,<0.0.6)",
     "dotenv (>=0.9.9,<0.10.0)",
-    "streamlit (>=1.43.2,<2.0.0)"
+    "streamlit (>=1.43.2,<2.0.0)",
+    "watchdog (>=6.0.0,<7.0.0)"
 ]
 
 
