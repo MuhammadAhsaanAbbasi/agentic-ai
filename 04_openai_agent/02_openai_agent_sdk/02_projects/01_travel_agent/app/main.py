@@ -10,6 +10,10 @@ from services.agnets import (
     travel_agent, UserContext, TravelPlan, FlightRecommendation, HotelRecommendation
 )
 from agents import Runner
+# from agents.run import RunConfig
+# from agents import set_default_openai_client, set_tracing_disabled
+# set_default_openai_client(external_client)
+# set_tracing_disabled(True)
 
 # Page Configuration
 st.set_page_config(
@@ -18,6 +22,12 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded",
 )
+
+# config = RunConfig(
+#         model=model,
+#         model_provider=external_client,
+#         tracing_disabled=True
+    # )
 
 # Custom CSS for better markdown
 st.markdown("""
@@ -235,6 +245,7 @@ if st.session_state.processing_message:
                 travel_agent,
                 input=input_list,
                 context=st.session_state.user_context,
+                # run_config=config
             ))
 
             response_content = format_agent_response(result.final_output)

@@ -1,5 +1,5 @@
 from agents import (
-    Agent, Runner, RunContextWrapper, InputGuardrail, GuardrailFunctionOutput, InputGuardrailTripwireTriggered, function_tool
+    Agent, Runner, RunContextWrapper, InputGuardrail, GuardrailFunctionOutput, InputGuardrailTripwireTriggered, function_tool, AsyncOpenAI, OpenAIChatCompletionsModel
 )
 from typing import List, Dict, Union, Optional
 from dataclasses import dataclass
@@ -13,6 +13,21 @@ import os
 _ = load_dotenv()
 
 RAPID_API_KEY=os.getenv("RAPID_API_KEY")
+MODEL="o3-mini-2025-01-31"
+
+# RAPID_API_KEY=os.getenv("RAPID_API_KEY")
+# gemini_api_key=os.getenv("GEMINI_API_KEY")
+
+#Reference: https://ai.google.dev/gemini-api/docs/openai
+# external_client = AsyncOpenAI(
+#     api_key=gemini_api_key,
+#     base_url="https://generativelanguage.googleapis.com/v1beta/openai/",
+# )
+
+# model = OpenAIChatCompletionsModel(
+#     model="gemini-2.0-flash",
+#     openai_client=external_client
+# )
 
 class TravelPlan(BaseModel):
     destination: str
@@ -212,7 +227,7 @@ async def search_hotel(wrapper: RunContextWrapper[UserContext], location: str, c
         
 
 @function_tool
-def get_weather(latitude: float, longitude: float):
+def get_weather_forecasts(latitude: float, longitude: float):
     """Get weather data for a given latitude and longitude."""
     BASE_URL = f"https://api.open-meteo.com/v1/forecast"
     params: Dict[str, Union[str, int, float]] = {
@@ -256,7 +271,7 @@ budget_analysis_agent = Agent(
     really crazy. If no budget was mentioned, just assume it's realistic.
     """,
     output_type=BudgetAnalysis,
-    model="o1-pro-2025-03-19"
+    model=MODEL
 )
 
 async def budget_guardrail(ctx, agent, input_data):
@@ -295,7 +310,7 @@ flight_agent = Agent[UserContext](
     Format your response in a clear, organized way with flight details and prices.
     """,
     tools=[search_flights],
-    model="o1-pro-2025-03-19",
+    model=MODEL,
     output_type=FlightRecommendation,
 )
 
@@ -315,7 +330,7 @@ hotel_agent = Agent[UserContext](
     Format your response in a clear, organized way with hotel details and prices.
     """,
     tools=[search_hotel],
-    model="o1-pro-2025-03-19",
+    model=MODEL,
     output_type=HotelRecommendation,
 )
 
@@ -326,7 +341,7 @@ conversational_agent = Agent[UserContext](
     You're a trip planning expert who answers basic user questions about their trip & offers any suggestions. 
     Act as a helpful assistant and be helpful in any way you can be.
     """,
-    model="o1-pro-2025-03-19",
+    model=MODEL,
 )
 
 travel_agent = Agent[UserContext](
@@ -348,8 +363,8 @@ travel_agent = Agent[UserContext](
     Always be helpful, informative & enthusiastic about travelling.
     """,
     handoffs=[flight_agent, hotel_agent, conversational_agent],
-    tools=[get_weather],
-    model="o1-pro-2025-03-19",
+    tools=[get_weather_forecasts],
+    model=MODEL,
     input_guardrails=[
         InputGuardrail(
             guardrail_function=budget_guardrail
@@ -358,96 +373,96 @@ travel_agent = Agent[UserContext](
     output_type=TravelPlan,
 )
 
-async def main():
-    # Create a user context with some preferences
-    user_context = UserContext(
-        user_id="user123",
-        preferred_airlines=["SkyWays", "OceanAir"],
-        hotel_amenities=["WiFi", "Pool"],
-        budget_level="mid-range"
-    )
+# async def main():
+#     # Create a user context with some preferences
+#     user_context = UserContext(
+#         user_id="user123",
+#         preferred_airlines=["SkyWays", "OceanAir"],
+#         hotel_amenities=["WiFi", "Pool"],
+#         budget_level="mid-range"
+#     )
     
-    # Example queries to test different aspects of the system
-    queries = [
-        "I'm planning a trip to Miami for 5 days with a budget of $2000. What should I do there?",
-        "I'm planning a trip to Tokyo for a week, looking to spend under $5,000. Suggestions?",
-        "I need a flight from New York to Chicago tomorrow",
-        "Find me a hotel in Paris with a pool for under $400 per night",
-        "I want to go to Dubai for a week with only $300"  # This should trigger the budget guardrail
-    ]
+#     # Example queries to test different aspects of the system
+#     queries = [
+#         "I'm planning a trip to Miami for 5 days with a budget of $2000. What should I do there?",
+#         "I'm planning a trip to Tokyo for a week, looking to spend under $5,000. Suggestions?",
+#         "I need a flight from New York to Chicago tomorrow",
+#         "Find me a hotel in Paris with a pool for under $400 per night",
+#         "I want to go to Dubai for a week with only $300"  # This should trigger the budget guardrail
+#     ]
     
-    for query in queries:
-        print("\n" + "="*50)
-        print(f"QUERY: {query}")
-        print("="*50)
+#     for query in queries:
+#         print("\n" + "="*50)
+#         print(f"QUERY: {query}")
+#         print("="*50)
         
-        try:
-            result = await Runner.run(travel_agent, query, context=user_context)
+#         try:
+#             result = await Runner.run(travel_agent, query, context=user_context)
             
-            print("\nFINAL RESPONSE:")
+#             print("\nFINAL RESPONSE:")
             
-            # Format the output based on the type of response
-            if hasattr(result.final_output, "airline"):  # Flight recommendation
-                flight = result.final_output
-                print("\n✈️ FLIGHT RECOMMENDATION ✈️")
-                print(f"Airline: {flight.airline}")
-                print(f"Departure: {flight.departure_time}")
-                print(f"Arrival: {flight.arrival_time}")
-                print(f"Price: ${flight.price}")
-                print(f"Direct Flight: {'Yes' if flight.direct_flight else 'No'}")
-                print(f"\nWhy this flight: {flight.recommendation_reason}")
+#             # Format the output based on the type of response
+#             if hasattr(result.final_output, "airline"):  # Flight recommendation
+#                 flight = result.final_output
+#                 print("\n✈️ FLIGHT RECOMMENDATION ✈️")
+#                 print(f"Airline: {flight.airline}")
+#                 print(f"Departure: {flight.departure_time}")
+#                 print(f"Arrival: {flight.arrival_time}")
+#                 print(f"Price: ${flight.price}")
+#                 print(f"Direct Flight: {'Yes' if flight.direct_flight else 'No'}")
+#                 print(f"\nWhy this flight: {flight.recommendation_reason}")
                 
-                # Show user preferences that influenced this recommendation
-                airlines = user_context.preferred_airlines
-                if airlines and flight.airline in airlines:
-                    print(f"\n👤 NOTE: This matches your preferred airline: {flight.airline}")
+#                 # Show user preferences that influenced this recommendation
+#                 airlines = user_context.preferred_airlines
+#                 if airlines and flight.airline in airlines:
+#                     print(f"\n👤 NOTE: This matches your preferred airline: {flight.airline}")
                 
-            elif hasattr(result.final_output, "name") and hasattr(result.final_output, "amenities"):  # Hotel recommendation
-                hotel = result.final_output
-                print("\n🏨 HOTEL RECOMMENDATION 🏨")
-                print(f"Name: {hotel.name}")
-                print(f"Location: {hotel.location}")
-                print(f"Price per night: ${hotel.price_per_night}")
+#             elif hasattr(result.final_output, "name") and hasattr(result.final_output, "amenities"):  # Hotel recommendation
+#                 hotel = result.final_output
+#                 print("\n🏨 HOTEL RECOMMENDATION 🏨")
+#                 print(f"Name: {hotel.name}")
+#                 print(f"Location: {hotel.location}")
+#                 print(f"Price per night: ${hotel.price_per_night}")
                 
-                print("\nAmenities:")
-                for i, amenity in enumerate(hotel.amenities, 1):
-                    print(f"  {i}. {amenity}")
+#                 print("\nAmenities:")
+#                 for i, amenity in enumerate(hotel.amenities, 1):
+#                     print(f"  {i}. {amenity}")
                 
-                # Highlight matching amenities from user preferences
-                preferred_amenities = user_context.hotel_amenities
-                if preferred_amenities:
-                    matching = [a for a in hotel.amenities if a in preferred_amenities]
-                    if matching:
-                        print("\n👤 MATCHING PREFERRED AMENITIES:")
-                        for amenity in matching:
-                            print(f"  ✓ {amenity}")
+#                 # Highlight matching amenities from user preferences
+#                 preferred_amenities = user_context.hotel_amenities
+#                 if preferred_amenities:
+#                     matching = [a for a in hotel.amenities if a in preferred_amenities]
+#                     if matching:
+#                         print("\n👤 MATCHING PREFERRED AMENITIES:")
+#                         for amenity in matching:
+#                             print(f"  ✓ {amenity}")
                 
-                print(f"\nWhy this hotel: {hotel.recommendation_reason}")
+#                 print(f"\nWhy this hotel: {hotel.recommendation_reason}")
                 
-            elif hasattr(result.final_output, "destination"):  # Travel plan
-                travel_plan = result.final_output
-                print(f"\n🌍 TRAVEL PLAN FOR {travel_plan.destination.upper()} 🌍")
-                print(f"Duration: {travel_plan.duration_days} days")
-                print(f"Budget: ${travel_plan.budget}")
+#             elif hasattr(result.final_output, "destination"):  # Travel plan
+#                 travel_plan = result.final_output
+#                 print(f"\n🌍 TRAVEL PLAN FOR {travel_plan.destination.upper()} 🌍")
+#                 print(f"Duration: {travel_plan.duration_days} days")
+#                 print(f"Budget: ${travel_plan.budget}")
                 
-                # Show budget level context
-                budget_level = user_context.budget_level
-                if budget_level:
-                    print(f"Budget Category: {budget_level.title()}")
+#                 # Show budget level context
+#                 budget_level = user_context.budget_level
+#                 if budget_level:
+#                     print(f"Budget Category: {budget_level.title()}")
                 
-                print("\n🎯 RECOMMENDED ACTIVITIES:")
-                for i, activity in enumerate(travel_plan.activities, 1):
-                    print(f"  {i}. {activity}")
+#                 print("\n🎯 RECOMMENDED ACTIVITIES:")
+#                 for i, activity in enumerate(travel_plan.activities, 1):
+#                     print(f"  {i}. {activity}")
                 
-                print(f"\n📝 NOTES: {travel_plan.notes}")
+#                 print(f"\n📝 NOTES: {travel_plan.notes}")
             
-            else:  # Generic response
-                print(result.final_output)
+#             else:  # Generic response
+#                 print(result.final_output)
                 
-        except InputGuardrailTripwireTriggered as e:
-            print("\n⚠️ GUARDRAIL TRIGGERED ⚠️")
+#         except InputGuardrailTripwireTriggered as e:
+#             print("\n⚠️ GUARDRAIL TRIGGERED ⚠️")
 
-import asyncio
+# import asyncio
 
-if __name__ == "__main__":
-    asyncio.run(main())
+# if __name__ == "__main__":
+#     asyncio.run(main())

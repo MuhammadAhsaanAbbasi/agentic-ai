@@ -5,7 +5,7 @@ services:
   chatbot-service:
     build:
       context: .
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
     ports:
       - "8501:8501"
     environment:
