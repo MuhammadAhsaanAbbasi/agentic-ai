@@ -4,7 +4,7 @@ import warnings
 
 from datetime import datetime
 
-from email_assistant.crew import EmailAssistant
+from email_assistant_crew.crew import EmailAssistant
 
 warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 
