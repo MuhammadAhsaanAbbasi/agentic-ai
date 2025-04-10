@@ -9,6 +9,9 @@ from crewai_tools import PDFSearchTool
 pdf_search_tool = PDFSearchTool(
 	pdf="./knowledge/example_home_inspection.pdf",
 	config=dict(
+		llm=dict(
+			provider="ollama", config=dict(model="deepseek-r1")
+		),
 		embedder=dict(
 			provider="ollama", config=dict(model="all-minilm")
 		)
