@@ -181,4 +181,6 @@ Multimodal research assistants, long‑term personal AI with memory, domain‑sp
 ## Conclusion
 Each framework brings distinct strengths. Choose **LangGraph** or **Bedrock** for enterprise workflows with strict control, **CrewAI** for role‑based team automation, **AutoGen** for conversational multi‑agent scenarios, **OpenAI Agent SDK** for quick tool‑augmented prototypes, and **Agno** for a comprehensive, multimodal agent platform. Assess your project’s complexity, collaboration needs, and infrastructure to select the best fit.
 
+---
+
 <h2 align="center">Dear Brother and Sister Show some ❤ by <img src="https://imgur.com/o7ncZFp.jpg" height=25px width=25px> this repository!</h2>
