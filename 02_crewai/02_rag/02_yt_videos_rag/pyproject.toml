@@ -1,0 +1,23 @@
+[project]
+name = "02_yt_videos_rag"
+version = "0.1.0"
+description = "02_yt_videos_rag using crewAI"
+authors = [{ name = "Your Name", email = "you@example.com" }]
+requires-python = ">=3.10,<3.13"
+dependencies = [
+    "crewai[tools]>=0.100.1,<1.0.0"
+]
+
+[project.scripts]
+02_yt_videos_rag = "02_yt_videos_rag.main:run"
+run_crew = "02_yt_videos_rag.main:run"
+train = "02_yt_videos_rag.main:train"
+replay = "02_yt_videos_rag.main:replay"
+test = "02_yt_videos_rag.main:test"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.crewai]
+type = "crew"
