@@ -1,0 +1,1 @@
+{"first_name":"Varun","last_name":"Mayya","main_topics_covered":["Entrepreneurship","Technology","AI"],"bio":"Varun Mayya is an entrepreneur and content creator known for his insights on technology and startups.","email_address":null,"linkedin_url":null,"has_linkedin":false,"x_url":null,"has_twitter":false,"instagram_url":null,"has_instagram":false}
