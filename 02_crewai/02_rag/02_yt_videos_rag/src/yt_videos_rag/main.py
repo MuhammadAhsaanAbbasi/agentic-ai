@@ -4,7 +4,7 @@ import warnings
 
 from datetime import datetime
 
-from 02_yt_videos_rag.crew import 02YtVideosRag
+from yt_videos_rag.crew import YtVideosRag
 
 warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 
@@ -17,13 +17,11 @@ def run():
     """
     Run the crew.
     """
-    inputs = {
-        'topic': 'AI LLMs',
-        'current_year': str(datetime.now().year)
-    }
     
     try:
-        02YtVideosRag().crew().kickoff(inputs=inputs)
+        youtube_channel_handle = input("Please enter the YouTube handle to analyze:\n")
+        result = YtVideosRag().crew().kickoff(inputs={"youtube_channel_handle": youtube_channel_handle})
+        print(result)
     except Exception as e:
         raise Exception(f"An error occurred while running the crew: {e}")
 
@@ -36,7 +34,7 @@ def train():
         "topic": "AI LLMs"
     }
     try:
-        02YtVideosRag().crew().train(n_iterations=int(sys.argv[1]), filename=sys.argv[2], inputs=inputs)
+        YtVideosRag().crew().train(n_iterations=int(sys.argv[1]), filename=sys.argv[2], inputs=inputs)
 
     except Exception as e:
         raise Exception(f"An error occurred while training the crew: {e}")
@@ -46,7 +44,7 @@ def replay():
     Replay the crew execution from a specific task.
     """
     try:
-        02YtVideosRag().crew().replay(task_id=sys.argv[1])
+        YtVideosRag().crew().replay(task_id=sys.argv[1])
 
     except Exception as e:
         raise Exception(f"An error occurred while replaying the crew: {e}")
@@ -59,7 +57,7 @@ def test():
         "topic": "AI LLMs"
     }
     try:
-        02YtVideosRag().crew().test(n_iterations=int(sys.argv[1]), openai_model_name=sys.argv[2], inputs=inputs)
+        YtVideosRag().crew().test(n_iterations=int(sys.argv[1]), openai_model_name=sys.argv[2], inputs=inputs)
 
     except Exception as e:
         raise Exception(f"An error occurred while testing the crew: {e}")
