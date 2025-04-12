@@ -1,4 +1,6 @@
-# YT Sponsership Crew
+# YouTube Sponsership Crew
+
+![YT Sponsership Crew](youtube_sponsorship_crew.png)
 
 This project is an end‑to‑end, multi‑agent pipeline for automatically assembling rich sponsorship profiles on YouTube creators. Starting from nothing more than a simple JSON input with a youtube_handle, the “Scrape Agent” kicks off a custom YouTube‑scraper tool that crawls a channel’s page to pull its URL, channel ID, subscriber count, description and the URLs of its two most recent videos. That raw data then feeds into a “Vector DB Agent,” which normalizes and stores the channel and video URLs in a vector database—laying the groundwork for rapid lookups and similarity searches in later stages.
 
