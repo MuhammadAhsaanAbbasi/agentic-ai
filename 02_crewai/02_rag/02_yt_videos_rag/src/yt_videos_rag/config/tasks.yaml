@@ -1,30 +1,32 @@
 scrape_youtube_channel:
   description: >
     Scrape the latest five videos from the specified YouTube channel.
-    Extract relevant information about the content of the latest five videos.
-    Ensure that all information comes directly from the YouTube channel and videos.
+    Extract relevant information about each video, such as title, view count,
+    video URL, and short description.
 
-    Here is the YouTube channel handle:
-
+    YouTube channel handle:
     {youtube_channel_handle}
   expected_output: >
-    Extract relevant information about the content of the latest five videos
-    from the specified YouTube channel.
+    JSON containing metadata for the five most recent videos from the specified channel,
+    including title, description, and direct URLs.
   agent: scrape_agent
 
 process_videos_task:
   description: >
-    Process the extracted video URLs from the previous task and add them to the
-    vecotr database. Ensure that each video is properly added to the vector database.
-    All information must come directly from the searches, Don't make up any information.
+    Process the scraped video URLs and add each one to the vector database.
+    Normalize the content and ensure that all entries are added correctly.
+
+    - Pull vector-friendly metadata
+    - Embed and store into vector DB
+    - Do not make up or infer any missing info
   expected_output: >
-    Successflly add the videos to the vector database
+    Successfully normalized and stored all video content into the vector database.
   agent: vector_db_agent
 
 find_initial_information_task:
   description: >
-    Ensure to fill out the 'ContentCreatorInfo' model wih as much
-    information as possible.
+    Fill out the ContentCreatorInfo model with as much verified data as possible:
+    
     ```
     class ContentCreatorInfo(BaseModel):
       first_name: Optional[str]
@@ -33,58 +35,42 @@ find_initial_information_task:
       bio: Optional[str]
       email_address: Optional[str]
       linkedin_url: Optional[str]
-      has_linked_in: Optional[bool] # if the user mentions they have a LinkedIn account, this is True
-      x_url: Optional[str] 
-      has_twitter: Optional[bool] # if the user mentions they have a Twitter account, this is True
-      has_skool: Optional[bool] # if the user mentions they have a Skool account, this is True
+      has_linked_in: Optional[bool]
+      x_url: Optional[str]
+      has_twitter: Optional[bool]
+      has_skool: Optional[bool]
     ```
 
-    If any information is missing, leave the value as None. All information msut comes
-    directly from the searches, Don't make up any information.
-    Rephrase and requery as necessary to obtain all needed information.
-
-    If looking for information as a whole doesn't work,
-      look for each item individually.
-    When looking for a first name individually, search for phrases like,
-      "my name is", "hey guys, it's"
-    when looking for an email, search for phrases like,
-      "you can contact me at", "my email is"
+    - All data must come from verified content, never assume.
+    - If looking for full info fails, search for each attribute individually.
+    - Use prompt phrases like: "my name is", "you can contact me at", etc.
   expected_output: >
-    Fill out the 'ContentCreatorInfo' model with as much information as possible.
-    Ensure all information is accurate and comes from the searches.
-    If any information is not found, leave it as None.
+    A completed ContentCreatorInfo model (as complete as possible),
+    leaving missing fields as None when no verifiable data is found.
   agent: general_research_agent
 
 follow_up_task:
   description: >
-    Search for any missing data in the 'ContentCreatorInfo' model.
-    Perform additional searches inthe vector database to ensure completeness.
-    All information must come directly from the searches, 
-    Don't make up any information.
-    Be thorough and creative in your search for missing data.
+    Search for any remaining missing values in the ContentCreatorInfo model.
+    Dig into the vector database and re-query search tools if necessary.
 
-    If looking for information as a whole doesn't work,
-      look for each item individually.
-    When looking for a first name individually, search for phrases like,
-      "my name is", "hey guys, it's"
-    when looking for an email, search for phrases like,
-      "you can contact me at", "my email is"
+    - If full profiles aren't found, search each field individually
+    - Use common patterns for names, emails, and social handles
+    - Be persistent and creative
   expected_output: >
-    Complete any missing fields in the 'ContentCreatorInfo' model.
-    Ensure all information is accurate and comes from the searches.
+    Fill in missing fields in the ContentCreatorInfo model.
+    Ensure everything is accurate and backed by the source.
   agent: follow_up_agent
 
 fallback_task:
   description: >
-    Perform a final check and use web scraping to find any remaining missing
-    information remaining missing information on the youtube channel with the
-    following handle:
+    As a last resort, perform deep scraping and crawling of the YouTube channel
+    (handle: {youtube_channel_handle}) to find any remaining missing information.
 
-    {youtube_channel_handle}
-
-    Ensure the 'ContentCreatorInfo' model is fully populated, All the information
-    must come directly from the searches, Don't make up any information.
+    - Ensure the ContentCreatorInfo model is fully populated
+    - All results must be derived from scraping / verified sources
+    - Do not guess or generate content
   expected_output: >
-    Ensure the 'ContentCreatorInfo' model is fully populated.
-    Enusre All information is accurate and comes from the searches.
+    A fully completed ContentCreatorInfo model with all remaining fields populated,
+    based entirely on reliable sources and scraping output.
   agent: fallback_agent

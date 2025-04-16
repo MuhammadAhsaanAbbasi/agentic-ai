@@ -7,8 +7,8 @@ from langchain_openai import ChatOpenAI
 from yt_videos_rag.model.model import ContentCreatorInfo
 from yt_videos_rag.tools.FetchYTVideos import FetchLatestVideosFromYTChannel
 from yt_videos_rag.tools.AddVideoVectorDBTool import AddVideoVectorDBTool
-from crewai_tools.tools.firecrawl_search_tool.firecrawl_search_tool import FirecrawlSearchTool
-from crewai_tools.tools.firecrawl_search_tool.firecrawl_search_tool import FirecrawlApp
+from yt_videos_rag.tools.WebSearch import WebSearchTool
+from langchain_community.tools.tavily_search import TavilySearchResults
 import os
 
 # Load environment variables
@@ -18,13 +18,8 @@ _ = load_dotenv()
 fetch_latest_videos_tool = FetchLatestVideosFromYTChannel()
 add_video_vector_db_tool = AddVideoVectorDBTool()
 # Instead of instantiating FirecrawlApp directly, use FirecrawlSearchTool:
-
-class PatchedFirecrawlSearchTool(FirecrawlSearchTool):
-    def _initialize_firecrawl(self):
-        self._firecrawl = FirecrawlApp(api_key=self.api_key)
-
-# Then use the patched tool:
-fire_crawl_search_tool = PatchedFirecrawlSearchTool(api_key=os.getenv("FIRECRAWL_API_KEY"))
+ 
+web_search_tool = WebSearchTool()
 
 rag_tool = RagTool()
 
@@ -67,19 +62,21 @@ class YtVideosRag():
     def fallback_agent(self) -> Agent:
         return Agent(
             config=self.agents_config['fallback_agent'],
-            tools=[fire_crawl_search_tool]
+            tools=[web_search_tool]
         )
 
     @task
     def scrape_youtube_channel(self) -> Task:
         return Task(
             config=self.tasks_config['scrape_youtube_channel'],
+            tools=[fetch_latest_videos_tool]
         )
 
     @task
     def process_videos_task(self) -> Task:
         return Task(
             config=self.tasks_config['process_videos_task'],
+            tools=[add_video_vector_db_tool]
         )
     
     @task
@@ -102,7 +99,7 @@ class YtVideosRag():
     def fallback_task(self) -> Task:
         return Task(
             config=self.tasks_config['fallback_task'],
-            tools=[fire_crawl_search_tool],
+            tools=[web_search_tool],
             output_pydantic=ContentCreatorInfo,
             output_file='report.md'
         )
