@@ -159,6 +159,34 @@ Multimodal research assistants, long‑term personal AI with memory, domain‑sp
 
 ---
 
+## Adoption and Community Trends
+
+All these frameworks emerged from the post-2023 surge in interest for autonomous agents and have seen **rapid growth and community adoption**. Several have garnered significant attention on GitHub, indicating developer interest:
+
+- **[AutoGen (Microsoft)](https://github.com/microsoft/autogen)** – as of early 2025, AutoGen leads in GitHub traction with ~43k stars. This reflects the strong backing of Microsoft Research and the appeal of its multi-agent conversation approach. An active Discord community and continuous improvements (v0.4 redesign) show ongoing developer engagement. Many developers likely use AutoGen for its robust features, and Microsoft’s promotion of it in research circles has spurred adoption in experimental projects and enterprise prototypes.
+
+- **[CrewAI](https://github.com/crewAIInc/crewAI)** – not far behind, CrewAI has around 30k stars and a vibrant community. The fact that 100k+ developers have taken CrewAI courses demonstrates a deliberate community-building effort. It’s becoming a “standard” for multi-agent automation in some circles, especially for those prioritizing structured collaboration. Enterprise interest is high: CrewAI’s team offers an enterprise suite and has partnerships (e.g., with SambaNova for AI hardware integration), indicating that companies are exploring it for production. The presence of CrewAI in educational content (DeepLearning.AI courses, government tech notes ) has also fueled its adoption.
+
+- **[Agno (Phidata)](https://github.com/agno-agi/agno)** – Agno has about 24k stars, impressive for an open-source project that isn’t backed by a tech giant. This popularity likely stems from its comprehensive feature set and developer-friendly design. The community forum and Discord show an engaged user base. Agno’s comparative benchmarks boasting vastly faster performance than LangGraph have been shared widely, attracting developers concerned with efficiency. We also see many YouTube tutorials and Medium articles about building agents with Agno, indicating grass-roots enthusiasm and growing adoption among indie developers and startups. Enterprises that need on-prem solutions might lean towards Agno for its open-source nature combined with rich capabilities.
+
+- **[LangGraph](https://github.com/langchain-ai/langgraph)** – with ~11k stars, LangGraph has a solid but more niche following, partly because it’s tied to LangChain. It’s used by big names like Uber and LinkedIn which speaks to enterprise adoption in complex projects requiring control. However, some developers might opt for LangChain’s higher-level agents if they don’t need LangGraph’s granular control, so its adoption is concentrated among those tackling truly complex workflows. The LangChain ecosystem’s popularity gave LangGraph an initial boost, and it continues to be maintained as a crucial part of that ecosystem. It’s recognized as a more **“expert-friendly”** tool, so its community, while smaller, is quite specialized and passionate about robust agent design.
+
+- **[OpenAI Agent SDK](https://github.com/openai/openai-agents-python)** – relatively new on the scene, it has ~8k stars on GitHub but is rapidly growing. Being the official OpenAI solution, many developers are trying it out, and we can expect its adoption to increase quickly through 2025. OpenAI’s release of the Agent SDK in March 2025 came with a lot of publicity (e.g., a VentureBeat article touted it as a game-changer for enterprise). Early adopters include companies like Coinbase and Box (through partnerships) which were mentioned in OpenAI’s announcements. The developer community is actively comparing it with existing tools – for example, discussions like  [*“OpenAI Agent SDK vs LangGraph”* on Reddit](https://www.reddit.com/r/LangChain/comments/1j95uat/openai_agent_sdk_vs_langgraph/) highlight how people are evaluating its place in the ecosystem. Its usage is also tied to OpenAI’s broader platform (e.g., those using GPT-4 via API can easily add the Agent SDK), which will drive adoption among OpenAI’s customer base. The OpenAI brand and promise of seamless integration are strong draws for both individual developers and enterprises (especially those already using Azure OpenAI or OpenAI API services).
+
+- **[Amazon Bedrock](https://aws.amazon.com/blogs/machine-learning/amazon-bedrock-announces-general-availability-of-multi-agent-collaboration/)** – since Bedrock Agents is a managed service, it’s not reflected in GitHub stats, but AWS reports high interest from enterprises. Bedrock’s multi-agent feature became generally available in late 2024, and AWS has been onboarding customers in finance, healthcare, and retail sectors who want to leverage multi-agent AI without building from scratch. Public interest is evidenced by coverage in AWS re:Invent keynotes and blogs. There’s also a growing discussion in AI communities about Bedrock’s approach (e.g., [*“Anyone using Bedrock for AI agents?”* on Reddit](https://medium.com/@awaisshaikh94/building-ai-agents-using-amazon-bedrock-agents-5de9ce0b23a3)). It might not be widely used by hobbyists due to cost and access, but large AWS customers are experimenting with it. We can foresee Bedrock’s adoption growing as success stories emerge, particularly for large-scale and compliance-sensitive deployments that trust AWS. Amazon’s entry validated the multi-agent concept for enterprise, increasing overall industry confidence in these frameworks.
+
+Community size and support vary: CrewAI and Agno have dedicated forums and Discords, indicating strong grassroots communities. AutoGen benefits from Microsoft’s support plus an academic following (papers and MSR blog posts). LangGraph benefits from LangChain’s large community (LangChain’s Discord/forums have channels for LangGraph). OpenAI’s Agents likely will be discussed heavily on OpenAI’s forums and community channels. Amazon Bedrock’s community is more enterprise/solution-architect oriented, with AWS support channels and partner ecosystem (it’s discussed in AWS community events, LinkedIn posts by AWS partners, etc., rather than open-source circles).
+
+Overall, interest in agentic frameworks is **surging across the board**, and each of these tools has carved out a niche: 
+- AutoGen for multi-agent dialogues and research,
+- CrewAI for structured multi-agent teams in production,
+- LangGraph for fine-grained control in complex tasks,
+- OpenAI SDK for ease of integration and official support,
+- Bedrock for fully managed enterprise solutions,
+- Agno for an all-in-one open platform with performance and multimodality.
+
+---
+
 ## Comparison Matrix
 
 | Dimension               | LangGraph      | CrewAI         | AutoGen        | OpenAI Agent SDK | Amazon Bedrock | Agno (Phidata) |
