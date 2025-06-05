@@ -27,7 +27,8 @@ class BaseAgent:
 
 class WebAgent(BaseAgent):
     def __init__(self, name: str):
-        super().__init__(name, [WebBrowserTools()], "You are a web agent that can browse the web and answer questions about the web.")
+        super().__init__(name, [WebBrowserTools()], 
+                         "You are a web agent that can browse the web and answer questions about the web.")
 
 
 agent = WebAgent("WebAgent")
